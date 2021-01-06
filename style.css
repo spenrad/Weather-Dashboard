@@ -1,0 +1,12 @@
+header {
+    text-align: center;
+}
+
+h1 {
+    padding: 20px;
+    font-weight: bold;
+}
+
+#searchSide {
+    height: 100%;
+}
