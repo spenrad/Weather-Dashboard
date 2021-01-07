@@ -10,7 +10,7 @@ function getCurrent() {
   var queryURL =
     "http://api.openweathermap.org/data/2.5/weather?q=" +
     cityName +
-    "&appid=40e2dec5462a7caaff123f43a6aa58d6";
+    "&units=imperial&appid=40e2dec5462a7caaff123f43a6aa58d6";
 
   $.ajax({
     url: queryURL,
@@ -40,27 +40,31 @@ function getfiveDay(lat, lon) {
     lat +
     "&lon=" +
     lon +
-    "&appid=40e2dec5462a7caaff123f43a6aa58d6";
+    "&units=imperial&appid=40e2dec5462a7caaff123f43a6aa58d6";
 
   $.ajax({
     url: queryURL,
     method: "GET",
   }).then(function (data) {
     console.log(data);
-    for (i = 0; i < 5; i++) {
+    // having i=1 gives us tomorrows forecast and i < 6 iterates through 4 more days
+    for (i = 1; i < 6; i++) {
       // using `...` allows up to add multiple lines which can be hard coded within simply by using a regular jQuery notation
       // this is ideal since we are going to for loop a bootstrap card component which has multiple lines of html
       // look closely where jQuery notation is used to manipulate the elements for each loop
+      var date5 = DateTime.fromSeconds(data.daily[i].dt).toLocaleString(
+        DateTime.DATE_SHORT
+      );
       var html = `
           <div class="card">
           <div class="card-body">
-              <h6 class="card-title">Date</h6>
+              <h6 class="card-title">${date5}</h6>
               <img src=${
                 "http://openweathermap.org/img/w/" +
                 data.daily[i].weather[0].icon +
                 ".png"
               } />
-              <p>${data.daily[i].temp.day + "K"}</p>
+              <p>${data.daily[i].temp.day + " °F"}</p>
               <p>${data.daily[i].humidity + "%"}</p>
           </div>
           </div>
@@ -79,7 +83,7 @@ function getUV(lat, lon) {
     lat +
     "&lon=" +
     lon +
-    "&appid=40e2dec5462a7caaff123f43a6aa58d6";
+    "&units=imperial&appid=40e2dec5462a7caaff123f43a6aa58d6";
 
   $.ajax({
     url: queryURL,
