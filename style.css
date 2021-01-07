@@ -2,6 +2,18 @@ header {
     text-align: center;
 }
 
+body{ 
+    background-image: url(panjinda-unsplash.jpg);
+}
+
+.container {
+    margin: 3rem auto;
+}
+
+.btn {
+    height: 38px;
+}
+
 h1 {
     padding: 20px;
     font-weight: bold;
@@ -28,4 +40,13 @@ h2 {
     margin: 1rem 1rem 2rem 0;
     padding: 0 2rem 1rem 0;
     text-align: left;
+    background: #ccc ;
+    width: 20%;
+    height: 35%;
+}
+
+#credit{
+    float: right;
+    font-weight: bold;
+    font-size: .75em;
 }
