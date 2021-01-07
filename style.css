@@ -7,6 +7,6 @@ h1 {
     font-weight: bold;
 }
 
-#searchSide {
-    height: 100%;
+.card {
+    display: inline-block;
 }
