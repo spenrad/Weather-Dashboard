@@ -21,7 +21,11 @@ function getCurrent() {
     var time = DateTime.fromSeconds(data.dt).toLocaleString(
       DateTime.DATE_SHORT
     );
+    
     $("h2").text(data.name + " " + time);
+    $("#tempNow").text("Temperature: " + data.main.temp + " °F");
+    $("#hum").text("Humidity: " + data.main.humidity + "%");
+    $("#wind").text("Wind Speed: " + data.wind.speed + " MPH");
 
     // calling this function with these specific arguments pulls the lat and lon data from the queried city
     // allows us to obtain lat and lon and pass it on to other functions where they are required in the api url
@@ -90,5 +94,6 @@ function getUV(lat, lon) {
     method: "GET",
   }).then(function (data) {
     console.log(data);
+    $("#uv").text(data.value)
   });
 }
