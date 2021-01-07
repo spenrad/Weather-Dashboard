@@ -23,6 +23,9 @@ function getCurrent() {
     );
     
     $("h2").text(data.name + " " + time);
+    $("#currentIcon").attr("src", "http://openweathermap.org/img/w/" +
+    data.weather[0].icon +
+    ".png");
     $("#tempNow").text("Temperature: " + data.main.temp + " °F");
     $("#hum").text("Humidity: " + data.main.humidity + "%");
     $("#wind").text("Wind Speed: " + data.wind.speed + " MPH");

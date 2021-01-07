@@ -7,6 +7,14 @@ h1 {
     font-weight: bold;
 }
 
+h2 {
+    display: inline;
+}
+
+#currentIcon {
+   display: inline;
+}
+
 #uv {
     margin-left: 1rem;
     background-color: white;
