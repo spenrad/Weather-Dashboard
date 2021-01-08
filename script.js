@@ -107,23 +107,25 @@ function getUV(lat, lon) {
   }).then(function (data) {
     console.log(data);
     $("#uv").text(data.value);
-  });
-}
-
-function uvColor() {
-  if ($('#uv').val() <= 2) {
+    function uvColor() {
+  if ($('#uv').text() <= "2") {
     $('#uv').css("background-color", "green");
   }
-  else if ($('#uv').val() <=5) {
+  else if ($('#uv').text() <="5") {
     $('#uv').css("background-color", "yellow");
   }
-  else if ($('#uv').val() <=7) {
+  else if ($('#uv').text() <="7") {
     $('#uv').css("background-color", "orange");
   }
-  else if ($('#uv').val() <=10) {
+  else if ($('#uv').text() <="10") {
     $('#uv').css("background-color", "red");
   } 
-  else if ($('#uv').val() >10) {
+  else if ($('#uv').text() >"10") {
     $('#uv').css("background-color", "purple");
   }
 }
+uvColor();
+  });
+}
+
+
