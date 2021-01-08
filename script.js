@@ -2,11 +2,18 @@
 var DateTime = luxon.DateTime;
 var time = DateTime.local();
 
+var cityName = "";
+$('.btn').on('click', function(){
+ cityName= $('input').val();
+ var newCityLi = $("<li class='list-group-item'>").attr("name", cityName).text(cityName);
+  
+  $("ul").prepend(newCityLi);
+  getCurrent();
+})
+
 // this function overwrites the HTML in the index to fill the current weather div
 //also calls on the other functions to prepare them with info they will need in their arguments
 function getCurrent() {
-  var cityName = "San+Francisco";
-  //   var cityName = "";
   var queryURL =
     "http://api.openweathermap.org/data/2.5/weather?q=" +
     cityName +
@@ -21,11 +28,12 @@ function getCurrent() {
     var time = DateTime.fromSeconds(data.dt).toLocaleString(
       DateTime.DATE_SHORT
     );
-    
+
     $("h2").text(data.name + " " + time);
-    $("#currentIcon").attr("src", "http://openweathermap.org/img/w/" +
-    data.weather[0].icon +
-    ".png");
+    $("#currentIcon").attr(
+      "src",
+      "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png"
+    );
     $("#tempNow").text("Temperature: " + data.main.temp + " °F");
     $("#hum").text("Humidity: " + data.main.humidity + "%");
     $("#wind").text("Wind Speed: " + data.wind.speed + " MPH");
@@ -34,9 +42,9 @@ function getCurrent() {
     // allows us to obtain lat and lon and pass it on to other functions where they are required in the api url
     getfiveDay(data.coord.lat, data.coord.lon);
     getUV(data.coord.lat, data.coord.lon);
+    uvColor();
   });
 }
-
 console.log(getCurrent());
 
 // this function appends a for looped set of cards for a five day forecast in daiv below or current weather div
@@ -55,6 +63,7 @@ function getfiveDay(lat, lon) {
   }).then(function (data) {
     console.log(data);
     // having i=1 gives us tomorrows forecast and i < 6 iterates through 4 more days
+    $("#fiveDayFore").empty();
     for (i = 1; i < 6; i++) {
       // using `...` allows up to add multiple lines which can be hard coded within simply by using a regular jQuery notation
       // this is ideal since we are going to for loop a bootstrap card component which has multiple lines of html
@@ -82,8 +91,8 @@ function getfiveDay(lat, lon) {
 }
 
 // this function fetches the UV index
-  // albeit from a different endpoint in the api, since our fuctions are separate, it makes no diff
-    // lat and lon is passed on through the argument, so it is simple to get the data we need even with a different endpoint
+// albeit from a different endpoint in the api, since our fuctions are separate, it makes no diff
+// lat and lon is passed on through the argument, so it is simple to get the data we need even with a different endpoint
 function getUV(lat, lon) {
   var queryURL =
     "http://api.openweathermap.org/data/2.5/uvi?lat=" +
@@ -97,6 +106,24 @@ function getUV(lat, lon) {
     method: "GET",
   }).then(function (data) {
     console.log(data);
-    $("#uv").text(data.value)
+    $("#uv").text(data.value);
   });
+}
+
+function uvColor() {
+  if ($('#uv').val() <= 2) {
+    $('#uv').css("background-color", "green");
+  }
+  else if ($('#uv').val() <=5) {
+    $('#uv').css("background-color", "yellow");
+  }
+  else if ($('#uv').val() <=7) {
+    $('#uv').css("background-color", "orange");
+  }
+  else if ($('#uv').val() <=10) {
+    $('#uv').css("background-color", "red");
+  } 
+  else if ($('#uv').val() >10) {
+    $('#uv').css("background-color", "purple");
+  }
 }

@@ -30,7 +30,7 @@ h2 {
 
 #uv {
     margin-left: 1rem;
-    background-color: white;
+    /* background-color: white; */
     padding: 1px 8px;
     /* curves the edges of the element */
     border-radius: 5px;
@@ -42,7 +42,6 @@ h2 {
 
 .card {
     display: inline-block;
-    margin-right: 1rem;
     text-align: left;
     background: #ccc ;
     
