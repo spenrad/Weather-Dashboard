@@ -2,14 +2,16 @@
 var DateTime = luxon.DateTime;
 var time = DateTime.local();
 
-var cityName = "";
+// var cityName = "";
 $('.btn').on('click', function(){
  cityName= $('input').val();
- var newCityLi = $("<li class='list-group-item'>").attr("name", cityName).text(cityName);
+ var newCityLi = $("<li class='list-group-item'>").attr("name", cityName).attr("class", "city").text(cityName);
   
   $("ul").prepend(newCityLi);
   getCurrent();
 })
+
+$(document).on('click', ".city", function () {getCurrent()});
 
 // this function overwrites the HTML in the index to fill the current weather div
 //also calls on the other functions to prepare them with info they will need in their arguments
